@@ -95,11 +95,7 @@ def load_workflow_ids(iteration: int) -> dict | None:
 
 
 def get_live_workflow_status(workflow_ids: dict) -> dict | None:
-    """Try to get live workflow status from workcell MCP.
-
-    Only works when running locally with access to the workcell network.
-    Returns None gracefully in cloud deployments.
-    """
+    """Try to get live workflow status from workcell MCP."""
     try:
         from gradient_descent import McpClient
 
@@ -333,6 +329,48 @@ def composition_trajectory_chart(history: list) -> go.Figure:
     return fig
 
 
+def objective_chart(history: list) -> go.Figure:
+    """Single clean line: objective function (center OD600) vs iteration."""
+    if not history:
+        fig = go.Figure()
+        fig.update_layout(height=300, margin=dict(l=40, r=20, t=30, b=40))
+        fig.add_annotation(text="No data yet", xref="paper", yref="paper", x=0.5, y=0.5, showarrow=False)
+        return fig
+
+    iters = [h["iteration"] for h in history]
+    scores = [h.get("center_od", 0) for h in history]
+
+    # Running best
+    best_so_far = []
+    current_best = 0
+    for s in scores:
+        current_best = max(current_best, s)
+        best_so_far.append(current_best)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=iters, y=scores, mode="lines+markers",
+        name="Score (Center OD)",
+        line=dict(color="#3b82f6", width=3),
+        marker=dict(size=10, symbol="circle"),
+    ))
+    fig.add_trace(go.Scatter(
+        x=iters, y=best_so_far, mode="lines",
+        name="Best so far",
+        line=dict(color="#15803d", width=2, dash="dot"),
+    ))
+
+    fig.update_layout(
+        height=300,
+        margin=dict(l=40, r=20, t=30, b=40),
+        xaxis=dict(title="Trial #", dtick=1, range=[0.5, MAX_ITERATIONS + 0.5]),
+        yaxis=dict(title="Objective Score (OD600)"),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        plot_bgcolor="#f8fafc",
+    )
+    return fig
+
+
 def composition_bar(composition: dict) -> go.Figure:
     novel_bio = WELL_VOLUME_UL - sum(composition.get(n, 0) for n in SUPPLEMENT_NAMES)
     components = ["Novel_Bio"] + SUPPLEMENT_NAMES
@@ -465,12 +503,26 @@ with m1:
     st.metric("Iteration", f"{current_iter} / {MAX_ITERATIONS}")
 with m2:
     best_od = state.get("best_od")
-    st.metric("Best OD600", f"{best_od:.4f}" if best_od else "—")
+    st.metric("Best Center OD", f"{best_od:.4f}" if best_od else "—")
 with m3:
     st.metric("Learning Rate (a)", f"{state.get('alpha', 1.0):.2f}")
 with m4:
     streak = state.get("no_improvement_count", 0)
     st.metric("No-improvement streak", f"{streak} / 2")
+
+st.divider()
+
+# Objective function chart — the hero chart
+st.subheader("Optimization Score")
+st.markdown(
+    '<div class="explanation">'
+    "The objective function: center-point OD600 at each trial. "
+    "If the optimization is working, this line should trend upward and flatten as it converges. "
+    "The dotted green line tracks the best score seen so far."
+    '</div>',
+    unsafe_allow_html=True,
+)
+st.plotly_chart(objective_chart(history), use_container_width=True, key="objective")
 
 st.divider()
 

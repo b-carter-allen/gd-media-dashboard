@@ -1,0 +1,41 @@
+{
+  "iteration": 4,
+  "timestamp": "2026-02-14T16:18:41.834580",
+  "composition": {
+    "Novel_Bio": 90,
+    "Glucose": 50,
+    "NaCl": 10,
+    "MgSO4": 30
+  },
+  "transfer_count": 29,
+  "alpha": 0.5,
+  "od_results": {
+    "control_od": 0.231,
+    "center_od": 0.1929,
+    "perturbed_ods": {
+      "Glucose": [
+        0.2089,
+        0.1929
+      ],
+      "NaCl": [
+        0.1912,
+        0.1895
+      ],
+      "MgSO4": [
+        0.2017,
+        0.1907
+      ]
+    }
+  },
+  "gradient": {
+    "Glucose": 0.0008000000000000007,
+    "NaCl": -0.0002549999999999969,
+    "MgSO4": 0.00032999999999999973
+  },
+  "next_composition": {
+    "Novel_Bio": 90,
+    "Glucose": 55,
+    "NaCl": 0,
+    "MgSO4": 35
+  }
+}

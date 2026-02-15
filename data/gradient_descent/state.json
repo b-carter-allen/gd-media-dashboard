@@ -1,15 +1,15 @@
 {
-  "current_iteration": 1,
+  "current_iteration": 8,
   "current_composition": {
-    "Glucose": 30,
-    "NaCl": 10,
-    "MgSO4": 30
+    "Glucose": 55,
+    "NaCl": 0,
+    "MgSO4": 35
   },
-  "alpha": 1.0,
-  "best_od": 0.1475,
-  "prev_center_od": 0.1475,
+  "alpha": 0.5,
+  "best_od": 0.226,
+  "prev_center_od": 0.1821,
   "no_improvement_count": 0,
-  "converged": false,
+  "converged": true,
   "history": [
     {
       "iteration": 1,
@@ -27,6 +27,125 @@
         "MgSO4": 0.0011950000000000016
       },
       "alpha": 1.0
+    },
+    {
+      "iteration": 2,
+      "composition": {
+        "Novel_Bio": 110,
+        "Glucose": 30,
+        "NaCl": 10,
+        "MgSO4": 30
+      },
+      "center_od": 0.1574,
+      "control_od": 0.2074,
+      "gradient": {
+        "Glucose": 0.0006399999999999989,
+        "NaCl": -0.0007849999999999996,
+        "MgSO4": -0.0027750000000000023
+      },
+      "alpha": 1.0
+    },
+    {
+      "iteration": 3,
+      "composition": {
+        "Novel_Bio": 120,
+        "Glucose": 40,
+        "NaCl": 0,
+        "MgSO4": 20
+      },
+      "center_od": 0.226,
+      "control_od": 0.2566,
+      "gradient": {
+        "Glucose": 0.0011499999999999982,
+        "NaCl": 6.49999999999984e-05,
+        "MgSO4": 0.0002899999999999986
+      },
+      "alpha": 1.0
+    },
+    {
+      "iteration": 4,
+      "composition": {
+        "Novel_Bio": 90,
+        "Glucose": 50,
+        "NaCl": 10,
+        "MgSO4": 30
+      },
+      "center_od": 0.1929,
+      "control_od": 0.231,
+      "gradient": {
+        "Glucose": 0.0008000000000000007,
+        "NaCl": -0.0002549999999999969,
+        "MgSO4": 0.00032999999999999973
+      },
+      "alpha": 0.5
+    },
+    {
+      "iteration": 5,
+      "composition": {
+        "Novel_Bio": 90,
+        "Glucose": 55,
+        "NaCl": 0,
+        "MgSO4": 35
+      },
+      "center_od": 0.1887,
+      "control_od": 0.2184,
+      "gradient": {
+        "Glucose": 0.0003799999999999998,
+        "NaCl": -0.00068,
+        "MgSO4": -0.0003799999999999998
+      },
+      "alpha": 0.5
+    },
+    {
+      "iteration": 6,
+      "composition": {
+        "Novel_Bio": 90,
+        "Glucose": 60,
+        "NaCl": 0,
+        "MgSO4": 30
+      },
+      "center_od": 0.1931,
+      "control_od": 0.228,
+      "gradient": {
+        "Glucose": -0.00018499999999999905,
+        "NaCl": -0.0010699999999999987,
+        "MgSO4": 5.000000000000004e-05
+      },
+      "alpha": 0.5
+    },
+    {
+      "iteration": 7,
+      "composition": {
+        "Novel_Bio": 90,
+        "Glucose": 55,
+        "NaCl": 0,
+        "MgSO4": 35
+      },
+      "center_od": 0.1939,
+      "control_od": 0.2254,
+      "gradient": {
+        "Glucose": 0.0008700000000000013,
+        "NaCl": -0.0006599999999999967,
+        "MgSO4": 0.0002250000000000002
+      },
+      "alpha": 0.5
+    },
+    {
+      "iteration": 8,
+      "composition": {
+        "Novel_Bio": 90,
+        "Glucose": 50,
+        "NaCl": 0,
+        "MgSO4": 40
+      },
+      "center_od": 0.1821,
+      "control_od": 0.2069,
+      "gradient": {
+        "Glucose": 0.0006649999999999989,
+        "NaCl": -0.0007349999999999995,
+        "MgSO4": -0.00024500000000000075
+      },
+      "alpha": 0.5
     }
   ]
 }

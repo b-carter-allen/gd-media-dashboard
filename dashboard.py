@@ -440,7 +440,7 @@ st.markdown(
 
 # Sidebar
 with st.sidebar:
-    auto_refresh = st.toggle("Auto-refresh (5s)", value=False)
+    auto_refresh = st.toggle("Auto-refresh (5s)", value=True)
     st.divider()
     st.caption("Gradient Descent Media Optimization")
     st.caption(f"Data: `{DATA_DIR}`")
@@ -641,7 +641,12 @@ if history:
         })
     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
-# Auto-refresh
+# Auto-refresh — always poll data for live updates during experiment runs
 if auto_refresh:
     time.sleep(5)
     st.rerun()
+else:
+    # Even without auto-refresh, add a manual refresh button
+    st.divider()
+    if st.button("Refresh data"):
+        st.rerun()
